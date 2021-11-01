@@ -1,0 +1,86 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="Control" type="Control"]
+anchor_right = 0.19
+anchor_bottom = 0.097
+margin_right = 0.439987
+margin_bottom = -0.200001
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="."]
+margin_left = 148.0
+margin_right = 160.0
+margin_bottom = 50.0
+focus_mode = 0
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_right = 144.0
+margin_bottom = 50.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="VBoxContainer" parent="HBoxContainer"]
+margin_right = 140.0
+margin_bottom = 50.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="header" type="Label" parent="HBoxContainer/Text"]
+margin_right = 140.0
+margin_bottom = 14.0
+text = "HEADER"
+
+[node name="text" type="Label" parent="HBoxContainer/Text"]
+margin_top = 18.0
+margin_right = 140.0
+margin_bottom = 32.0
+text = "flavor text (yummy!!!!)"
+
+[node name="state" type="Label" parent="HBoxContainer/Text"]
+margin_top = 36.0
+margin_right = 140.0
+margin_bottom = 50.0
+text = "is it done :)"
+
+[node name="img" type="Control" parent="HBoxContainer"]
+margin_left = 144.0
+margin_right = 144.0
+margin_bottom = 50.0
+
+[node name="icon" type="AnimatedSprite" parent="HBoxContainer/img"]
+frames = SubResource( 1 )
+centered = false
+
+[node name="waypointEnable" type="AnimatedSprite" parent="HBoxContainer/img"]
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( -80, 0 )
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 1 )
+centered = false
+
+[node name="wayPoint" type="Button" parent="HBoxContainer/img/waypointEnable"]
+margin_right = 32.0
+margin_bottom = 32.0
+focus_mode = 0
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
