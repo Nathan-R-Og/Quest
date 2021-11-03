@@ -1,7 +1,39 @@
 extends Node2D
 
+export var friendListPath = NodePath()
+onready var friendlist = get_node(friendListPath)
 
 var friend = [["Name","prettyCool", "default", 25, 200,
+"Takes long walks on the beach.\nIsn't very popular.",
+"Likes: Tomatoes, Raddishes, and salty things.\nDislikes: Sweet things, water, fluid of any kind."],
+["Name","prettyCool", "default", 25, 200,
+"Takes long walks on the beach.\nIsn't very popular.",
+"Likes: Tomatoes, Raddishes, and salty things.\nDislikes: Sweet things, water, fluid of any kind."],
+["Name","prettyCool", "default", 25, 200,
+"Takes long walks on the beach.\nIsn't very popular.",
+"Likes: Tomatoes, Raddishes, and salty things.\nDislikes: Sweet things, water, fluid of any kind."],
+["Name","prettyCool", "default", 25, 200,
+"Takes long walks on the beach.\nIsn't very popular.",
+"Likes: Tomatoes, Raddishes, and salty things.\nDislikes: Sweet things, water, fluid of any kind."],
+["Name","prettyCool", "default", 25, 200,
+"Takes long walks on the beach.\nIsn't very popular.",
+"Likes: Tomatoes, Raddishes, and salty things.\nDislikes: Sweet things, water, fluid of any kind."],
+["Name","prettyCool", "default", 25, 200,
+"Takes long walks on the beach.\nIsn't very popular.",
+"Likes: Tomatoes, Raddishes, and salty things.\nDislikes: Sweet things, water, fluid of any kind."],
+["Name","prettyCool", "default", 25, 200,
+"Takes long walks on the beach.\nIsn't very popular.",
+"Likes: Tomatoes, Raddishes, and salty things.\nDislikes: Sweet things, water, fluid of any kind."],
+["Name","prettyCool", "default", 25, 200,
+"Takes long walks on the beach.\nIsn't very popular.",
+"Likes: Tomatoes, Raddishes, and salty things.\nDislikes: Sweet things, water, fluid of any kind."],
+["Name","prettyCool", "default", 25, 200,
+"Takes long walks on the beach.\nIsn't very popular.",
+"Likes: Tomatoes, Raddishes, and salty things.\nDislikes: Sweet things, water, fluid of any kind."],
+["Name","prettyCool", "default", 25, 200,
+"Takes long walks on the beach.\nIsn't very popular.",
+"Likes: Tomatoes, Raddishes, and salty things.\nDislikes: Sweet things, water, fluid of any kind."],
+["Name","prettyCool", "default", 25, 200,
 "Takes long walks on the beach.\nIsn't very popular.",
 "Likes: Tomatoes, Raddishes, and salty things.\nDislikes: Sweet things, water, fluid of any kind."]
 ]
@@ -24,16 +56,16 @@ func _process(delta):
 
 
 func list():
-	var deleteAtor = $friends.get_child_count() - 1
+	var deleteAtor = friendlist.get_child_count() - 1
 	while deleteAtor >= 0:
-		$friends.get_child(deleteAtor).queue_free()
+		friendlist.get_child(deleteAtor).queue_free()
 		deleteAtor -= 1
 	
 	var iterateor = 0
 	while iterateor < friend.size():
 		var curr = friend[iterateor]
 		var friendInstance = preload("res://friend.tscn").instance()
-		$friends.add_child(friendInstance)
+		friendlist.add_child(friendInstance)
 		var textNode = friendInstance.get_node("TopBar/Text")
 		var header = textNode.get_node("header")
 		header.text = curr[0]
@@ -62,16 +94,17 @@ func list():
 		barScale.scale.x = outOf * stretch
 		barScale.position.x = -92.5 + barScale.scale.x
 		bar.position.x = widddth / 2
+		barScale.position.y = -10
 		var ticker1 = bar.get_node("ticker")
 		var ticker2 = bar.get_node("ticker2")
 		var ticker3 = bar.get_node("ticker3")
 		var ticker4 = bar.get_node("ticker4")
 		var ticker5 = bar.get_node("ticker5")
-		ticker1.position.x = (-stretch) - 7.5
-		ticker2.position.x = ((stretch * 0.5) - stretch) - 7.5
-		ticker3.position.x = ((stretch) - stretch) - 7.5
-		ticker4.position.x = ((stretch * 1.5) - stretch) - 7.5
-		ticker5.position.x = ((stretch * 2) - stretch) - 7.5
+		ticker1.position.x = (-stretch) - 8.5
+		ticker2.position.x = ((stretch * 0.5) - stretch) - 8.5
+		ticker3.position.x = ((stretch) - stretch) - 8.5
+		ticker4.position.x = ((stretch * 1.5) - stretch) - 8.5
+		ticker5.position.x = ((stretch * 2) - stretch) - 8.5
 		iterateor += 1
 
 

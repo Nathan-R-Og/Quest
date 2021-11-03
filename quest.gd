@@ -1,10 +1,12 @@
 extends Node2D
 
+export var questListPath = NodePath()
+onready var questList = get_node(questListPath)
 
 var quest = [["Woah","dassa quest", false, "default", false, Vector2(0,0), "res://Node2D"],
-["I KNOW RIGHT","its so cool", false, "default"],
-["not really","(i am a pessimist)", true, "default"],
-["shut up","i didnt ask", true, "default"]
+["I KNOW RIGHT","its so cool", false, "default", false, Vector2(0,0), "res://Node2D"],
+["not really","(i am a pessimist)", true, "default", false, Vector2(0,0), "res://Node2D"],
+["shut up","i didnt ask", true, "default", false, Vector2(0,0), "res://Node2D"]
 ]
 
 
@@ -18,16 +20,17 @@ func _ready():
 
 
 func list():
-	var deleteAtor = $Quests.get_child_count()
+	var deleteAtor = questList.get_child_count()
 	while deleteAtor > 0:
-		$Quests.get_child(deleteAtor - 1).queue_free()
+		questList.get_child(deleteAtor - 1).queue_free()
 		deleteAtor -= 1
 	
 	var iterateor = 0
 	while iterateor < quest.size():
 		var curr = quest[iterateor]
 		var questInstance = preload("res://questAsset.tscn").instance()
-		var textNode = questInstance.get_node("HBoxContainer/Text")
+		var hungryBox = questInstance.get_node("HBoxContainer")
+		var textNode = hungryBox.get_node("Text")
 		textNode.get_node("header").text = curr[0]
 		textNode.get_node("text").text = curr[1]
 		var stateRead = ""
@@ -37,24 +40,37 @@ func list():
 			true:
 				stateRead = "COMPLETED"
 		textNode.get_node("state").text = stateRead
-		questInstance.get_node("HBoxContainer/img/icon").animation = curr[3]
-		var size = 64
+		var img = hungryBox.get_node("img")
+		var icon = img.get_node("icon")
+		icon.animation = curr[3]
+		var size = (icon.frames.get_frame(icon.animation, icon.frame).get_width() * icon.scale.x)
 		var base = textNode.rect_size.y / size
-		questInstance.get_node("HBoxContainer/img/icon").scale = questInstance.get_node("HBoxContainer/img/icon").scale * base
+		icon.scale = icon.scale * base
 		
-		var Secondbase = questInstance.get_node("HBoxContainer/img/icon").scale.x * size
-		questInstance.get_node("HBoxContainer/img/waypointEnable").scale = questInstance.get_node("HBoxContainer/img/icon").scale / 4
-		questInstance.get_node("HBoxContainer/img/waypointEnable").position.x = Secondbase - (questInstance.get_node("HBoxContainer/img/waypointEnable").scale.x * (size / 2))
-		questInstance.get_node("HBoxContainer/img/waypointEnable").modulate.r = int(curr[3])
-		questInstance.get_node("Button").rect_size.x = textNode.rect_size.x + (base * (size / 4))
-		questInstance.get_node("Button").rect_size.y = textNode.rect_size.y
-		questInstance.get_node("Button").connect("pressed", self, "_questSelect", [iterateor])
-		questInstance.get_node("HBoxContainer/img/waypointEnable/wayPoint").rect_size = questInstance.get_node("HBoxContainer/img/waypointEnable").scale * size
-		questInstance.get_node("HBoxContainer/img/waypointEnable/wayPoint").connect("pressed", self, "_wayPointSelect", [iterateor])
-		$Quests.add_child(questInstance)
+		var Secondbase = icon.scale.x * size
+		var waypoint = img.get_node("waypointEnable")
+		waypoint.scale = icon.scale / 4
+		waypoint.position.x = Secondbase - (waypoint.scale.x * (size / 2))
+		waypoint.modulate.r = int(curr[3])
+		var deleteButton = questInstance.get_node("Button")
+		var reCOunt = textNode.rect_size.x
+		print(reCOunt)
+		deleteButton.rect_size.x = reCOunt + (size / 2)
+		deleteButton.rect_size.y = textNode.rect_size.y
+		deleteButton.rect_position = Vector2(0,0)
+		deleteButton.connect("pressed", self, "_questSelect", [iterateor])
+		var waypointToggle = waypoint.get_node("wayPoint")
+		waypointToggle.connect("pressed", self, "_wayPointSelect", [iterateor])
+		
+		
+		
+		questList.add_child(questInstance)
 		curr.append(questInstance)
 		iterateor += 1
-
+		
+		
+		
+	
 
 func _questSelect(id):
 	deleteId = id

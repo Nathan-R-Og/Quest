@@ -13,8 +13,23 @@ animations = [ {
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
+friendListPath = NodePath("ScrollContainer/friends")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+margin_right = 431.0
+margin_bottom = 260.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="friends" type="VBoxContainer" parent="ScrollContainer"]
+custom_constants/separation = 96
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="debug" type="Control" parent="."]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 __meta__ = {
@@ -125,14 +140,6 @@ margin_bottom = 174.132
 text = "syntax"
 align = 1
 valign = 1
-
-[node name="friends" type="VBoxContainer" parent="."]
-margin_right = 212.0
-margin_bottom = 151.0
-custom_constants/separation = 64
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="InfoPopup" type="PopupPanel" parent="."]
 margin_left = 0.667419

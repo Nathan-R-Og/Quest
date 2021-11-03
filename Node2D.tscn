@@ -4,10 +4,16 @@
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
+questListPath = NodePath("ScrollContainer/Quests")
 
-[node name="Quests" type="VBoxContainer" parent="."]
-margin_right = 212.0
-margin_bottom = 151.0
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+margin_right = 431.0
+margin_bottom = 260.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quests" type="VBoxContainer" parent="ScrollContainer"]
 custom_constants/separation = 64
 __meta__ = {
 "_edit_use_anchors_": false
@@ -74,6 +80,7 @@ align = 1
 valign = 1
 
 [node name="debug" type="Control" parent="."]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 
